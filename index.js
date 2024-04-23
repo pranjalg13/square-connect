@@ -1,6 +1,5 @@
 
 const squareVersion = '2024-04-17';
-const accessToken = 'EAAAl1qYv9TUI-_jEiOIKq130pLG_Odgkw3igvE4lE8cjX4EjsAWp5n99JUIWIX8';
 
 fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
   method: 'GET',
