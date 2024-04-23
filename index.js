@@ -1,19 +1,23 @@
-var myHeaders = new Headers();
-myHeaders.append("Square-Version", "2024-04-17");
-myHeaders.append("Authorization", "Bearer EAAAl1qYv9TUI-_jEiOIKq130pLG_Odgkw3igvE4lE8cjX4EjsAWp5n99JUIWIX8");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "__cf_bm=xZtx9Ww4GzZXjpaUpl87c0jQP23o6T0.jhB389JcN1Y-1713878332-1.0.1.1-trZzWd0J0Y0yETAIq5StnXH7P5Hqwz71INteLl5H7LzOIPkn0igkpB3Uv0HPK10TRzikMDK48SQ7EbPtvv24Og");
 
-var requestOptions = {
+const squareVersion = '2024-04-17';
+const accessToken = 'EAAAl1qYv9TUI-_jEiOIKq130pLG_Odgkw3igvE4lE8cjX4EjsAWp5n99JUIWIX8';
+
+fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
   method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("https://connect.squareupsandbox.com/v2/catalog/list", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  headers: {
+    'Square-Version': squareVersion,
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+    'Accept': '*/*'
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log(data);
+})
+.catch(error => {
+  console.error('Error:', error);
+});
 
 // // Initialize the Square SDK with your application ID
 // const squareApplicationId = 'YOUR_SQUARE_APPLICATION_ID';
