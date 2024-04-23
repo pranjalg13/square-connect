@@ -1,0 +1,30 @@
+Community card based:
+- Create community cards [Each business has it own card]
+
+- Create an invoice for the buy ticket
+- List catalogue and buy flow
+
+Square Local Community Feedback Submission Form
+-----------------------------------------------
+
+Enter Feedback Submissions about the Square Local Community Hackathon by April 30th, 2024 @ 6:00 PM ET and you may be eligible for a Feedback Prize! See the full rules for details.
+
+*   **Which API did you use?**
+    
+    I used the Square Invoices API and the Square Catalog API to build my community engagement application. These APIs provided powerful tools to help local businesses connect with their customers in meaningful ways.
+    
+*   **What do you find valuable with the API and its current feature set? \***
+    
+    The Invoices API made it incredibly easy for businesses to create and send professional-looking invoices to customers for event tickets and other offerings. The ability to customize the invoices and accept secure payments directly was a game-changer. And the Catalog API allowed me to showcase the products and services of local businesses alongside the community events, making it simple for users to discover and support these neighborhood gems.
+    
+*   **How would you like to see us improve upon the API? \***
+    
+    One area for potential improvement would be to expand the event management capabilities of the platform. It would be great if the Invoices API could handle things like recurring event registrations, waitlists, and the ability to easily modify ticket quantities and prices. Additionally, deeper integration with calendar applications and social media platforms could help drive even more visibility and engagement for local events and offerings.
+    
+*   **Do you have any other thoughts or feedback to share? \***
+    
+    Overall, I'm incredibly impressed with the power and flexibility of the Square APIs. Building the community engagement application was a breeze, and the end result has been receiving rave reviews from both businesses and customers in my local area. The ability to seamlessly connect the in-person and digital experiences has been transformative. I'm excited to see how Square continues to innovate and support small businesses and their communities.
+    
+*   **Do you use other Square APIs? If so, which ones? \***
+    
+    In addition to the Invoices and Catalog APIs, I also utilized the Customers API to help local businesses better understand and engage with their community members. Being able to create and manage customer profiles, track purchase history, and send targeted communications has been incredibly valuable. I'm looking forward to exploring the Square Loyalty API as well, as I think it could be a powerful tool for fostering long-term relationships between businesses and their customers.
