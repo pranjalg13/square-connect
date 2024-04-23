@@ -7,7 +7,9 @@ fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
   headers: {
     'Square-Version': squareVersion,
     'Authorization': `Bearer ${accessToken}`,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin' : '*',
+    'Accept': '*/*'
   }
 })
 .then(response => response.json())
