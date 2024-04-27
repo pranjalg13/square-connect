@@ -1,0 +1,28 @@
+/* Custom styles for related products and services */
+
+/* Styling for product card */
+.product-card {
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+  
+  /* Styling for product title */
+  .product-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Styling for product price */
+  .product-price {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  /* Styling for product description */
+  .product-description {
+    font-size: 0.9rem;
+    color: #495057;
+  }
+  

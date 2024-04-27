@@ -1,22 +1,22 @@
 
-const squareVersion = '2024-04-17';
+// const squareVersion = '2024-04-17';
 
-fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
-  method: 'GET',
-  headers: {
-    'Square-Version': squareVersion,
-    'Authorization': `Bearer ${accessToken}`,
-    'Content-Type': 'application/json',
-    'Accept': '*/*'
-  }
-})
-.then(response => response.json())
-.then(data => {
-  console.log(data);
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+// fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
+//   method: 'GET',
+//   headers: {
+//     'Square-Version': squareVersion,
+//     'Authorization': `Bearer ${accessToken}`,
+//     'Content-Type': 'application/json',
+//     'Accept': '*/*'
+//   }
+// })
+// .then(response => response.json())
+// .then(data => {
+//   console.log(data);
+// })
+// .catch(error => {
+//   console.error('Error:', error);
+// });
 
 // // Initialize the Square SDK with your application ID
 // const squareApplicationId = 'YOUR_SQUARE_APPLICATION_ID';
