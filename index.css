@@ -25,3 +25,27 @@
   padding: 1rem;
   border-radius: 0.25rem;
 }
+
+.card{
+  padding:0;
+}
+
+.container-fluid{
+  padding:0;
+  margin: 0;
+  /* width: 100%;
+  margin:0; */
+}
+
+.navbar{
+  padding: 5px;
+}
+
+.col{
+  padding:0;
+}
+
+.row{
+  margin:1px;
+  padding:0;
+}
