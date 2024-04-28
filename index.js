@@ -1,6 +1,13 @@
 
 // const squareVersion = '2024-04-17';
 
+function redirectToProducts() {
+  console.log("He;;po");
+  // Redirect to the desired HTML page
+  window.location.href = "related-products.html";
+}
+
+
 // fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
 //   method: 'GET',
 //   headers: {
