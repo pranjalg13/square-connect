@@ -16,7 +16,7 @@ fetch('https://square-hack-backend.onrender.com/get-catalog', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer EAAAEMGIzert15GGCNajtFaVYI2aTgMKJPngOMB0vzRgSclRiC3jjDZgX1IDBPUP'
+    'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
   }
 })
 .then(response => {
@@ -34,19 +34,60 @@ fetch('https://square-hack-backend.onrender.com/get-catalog', {
 
 
 
+// Function to generate UUID (RFC4122 version 4)
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0,
+      v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 // Handle the "Buy Tickets" button for the first constant event
 var firstEventBuyTickets = document.querySelector('.btn-buy-tickets[data-event-id="1"]');
 firstEventBuyTickets.addEventListener('click', function() {
-    // Disable the button
-    firstEventBuyTickets.disabled = true;
-    // Store the disabled status in local storage
-    localStorage.setItem('firstEventDisabled', 'true');
+    // Generate idempotency key (UUID)
+    var idempotencyKey = generateUUID();
+    
+    // Fetch payment link when "Buy Tickets" button is clicked
+    fetch('https://square-hack-backend.onrender.com/payment-link', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Replace 'YOUR_BEARER_TOKEN' with your actual bearer token
+        'Authorization': 'Bearer EAAAEMGIzert15GGCNajtFaVYI2aTgMKJPngOMB0vzRgSclRiC3jjDZgX1IDBPUP'
+      },
+      body: JSON.stringify({
+        "idempotencyKey": idempotencyKey,
+        "quickPay": {
+          "name": "Ticket ",
+          "priceMoney": {
+            "amount": 16,
+            "currency": "USD"
+          },
+          "locationId": "LB2W4A7DASQ8S"
+        }
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle the response from the payment link API
+      console.log(data);
+      // Redirect to the URL received in the response
+      window.location.href = data.url;
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 });
 
-// Check if the first constant event's button should be disabled
-if (localStorage.getItem('firstEventDisabled') === 'true') {
-    firstEventBuyTickets.disabled = true;
-}
+
+
 
 
 // Retrieve existing events from local storage
@@ -93,21 +134,49 @@ if (typeof(Storage) !== "undefined") {
               buyTickets.textContent = 'Buy Tickets';
               eventCard.appendChild(buyTickets);
 
-            // Check if this button is disabled for the current user
-            var disabledButtons = JSON.parse(localStorage.getItem('disabledButtons')) || [];
-            if (disabledButtons.includes(index.toString())) {
-                buyTickets.classList.add('disabled'); // Add the 'disabled' class
-            }
+            // // Check if this button is disabled for the current user
+            // var disabledButtons = JSON.parse(localStorage.getItem('disabledButtons')) || [];
+            // if (disabledButtons.includes(index.toString())) {
+            //     buyTickets.classList.add('disabled'); // Add the 'disabled' class
+            // }
 
-            // Add event listener to handle button click
-            buyTickets.addEventListener('click', function() {
-                // Disable the button
-                buyTickets.classList.add('disabled'); // Add the 'disabled' class
-                // Add the event ID to the list of disabled buttons
-                disabledButtons.push(index.toString());
-                // Store the updated list in local storage
-                localStorage.setItem('disabledButtons', JSON.stringify(disabledButtons));
-            });
+                // Add event listener to handle button click
+                buyTickets.addEventListener('click', function() {
+                  // Fetch payment link when "Buy Tickets" button is clicked
+                  fetch('https://square-hack-backend.onrender.com/payment-link', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          // Use the bearer token from environment variable
+                          'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+                      },
+                      body: JSON.stringify({
+                          "idempotencyKey": generateUUID(),
+                          "quickPay": {
+                              "name": event.eventName + " Ticket", // Use event name in ticket name
+                              "priceMoney": {
+                                  "amount": parseInt(event.ticketPrice), // Convert price to cents
+                                  "currency": "USD"
+                              },
+                              "locationId": "LB2W4A7DASQ8S"
+                          }
+                      })
+                  })
+                  .then(response => {
+                      if (!response.ok) {
+                          throw new Error('Network response was not ok');
+                      }
+                      return response.json();
+                  })
+                  .then(data => {
+                      // Redirect to the URL received in the response
+                      window.location.href = data.url;
+                  })
+                  .catch(error => {
+                      console.error('There was a problem with the fetch operation:', error);
+                  });
+              });
+
 
               // Append event card to the container
               eventContainer.appendChild(eventCard);
