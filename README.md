@@ -1,1 +1,1 @@
-# square-connect
+# Square Local Community Hackathon

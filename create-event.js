@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.error('Local storage is not supported in this browser.');
         }
+        // Redirect to home page after event is created
+        window.location.href = 'index.html'; // Change 'index.html' to the URL of your home page
 
         // Optionally, you can redirect or display a confirmation message here
     });
