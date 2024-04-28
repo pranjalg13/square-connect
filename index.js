@@ -1,11 +1,16 @@
 
 // const squareVersion = '2024-04-17';
 
-function redirectToProducts() {
-  console.log("He;;po");
-  // Redirect to the desired HTML page
-  window.location.href = "related-products.html";
-}
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth' // Change the initial view as needed
+    // Add more configuration options as needed
+  });
+
+  calendar.render();
+});
 
 
 // fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
