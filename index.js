@@ -13,14 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Handle the "Buy Tickets" button for the first event (non-local storage event)
+// Handle the "Buy Tickets" button for the first constant event
 var firstEventBuyTickets = document.querySelector('.btn-buy-tickets[data-event-id="1"]');
 firstEventBuyTickets.addEventListener('click', function() {
-  console.log("Hello");
-  firstEventBuyTickets.classList.add('disabled');
     // Disable the button
     firstEventBuyTickets.disabled = true;
+    // Store the disabled status in local storage
+    localStorage.setItem('firstEventDisabled', 'true');
 });
+
+// Check if the first constant event's button should be disabled
+if (localStorage.getItem('firstEventDisabled') === 'true') {
+    firstEventBuyTickets.disabled = true;
+}
 
 
 // Retrieve existing events from local storage
