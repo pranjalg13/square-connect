@@ -54,8 +54,8 @@ firstEventBuyTickets.addEventListener('click', function() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Replace 'YOUR_BEARER_TOKEN' with your actual bearer token
-        'Authorization': 'Bearer EAAAEMGIzert15GGCNajtFaVYI2aTgMKJPngOMB0vzRgSclRiC3jjDZgX1IDBPUP'
+        
+        'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
       },
       body: JSON.stringify({
         "idempotencyKey": idempotencyKey,
