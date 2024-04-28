@@ -13,6 +13,88 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Handle the "Buy Tickets" button for the first event (non-local storage event)
+var firstEventBuyTickets = document.querySelector('.btn-buy-tickets[data-event-id="1"]');
+firstEventBuyTickets.addEventListener('click', function() {
+  console.log("Hello");
+  firstEventBuyTickets.classList.add('disabled');
+    // Disable the button
+    firstEventBuyTickets.disabled = true;
+});
+
+
+// Retrieve existing events from local storage
+if (typeof(Storage) !== "undefined") {
+  var events = JSON.parse(localStorage.getItem('events')) || [];
+  console.log(events);
+
+  // Check if there are any events stored
+  if (events.length > 0) {
+      // Get the container where event cards will be appended
+      var eventContainer = document.querySelector('.card-body');
+
+      // Render event cards for each event
+      events.forEach(function(event, index) {
+          // Skip the first event (already displayed)
+          if (index >= 0) {
+              // Format the event date
+              var eventDate = new Date(event.eventDate);
+              var monthName = eventDate.toLocaleString('default', { month: 'long' });
+              var formattedDate = monthName + " " + eventDate.getDate() + ", " + eventDate.getFullYear();
+
+              // Create event card elements
+              var eventCard = document.createElement('div');
+              eventCard.classList.add('event-card', 'mb-3');
+
+              var title = document.createElement('h5');
+              title.classList.add('event-title');
+              title.textContent = event.eventName;
+              eventCard.appendChild(title);
+
+              var date = document.createElement('p');
+              date.classList.add('event-date');
+              date.innerHTML = '<span class="badge badge-dark">' + formattedDate + ' || $' + event.ticketPrice + ' per person</span>';
+              eventCard.appendChild(date);
+
+              var description = document.createElement('p');
+              description.classList.add('event-description');
+              description.textContent = event.eventDescription;
+              eventCard.appendChild(description);
+
+              var buyTickets = document.createElement('a');
+              buyTickets.classList.add('btn', 'btn-primary', 'btn-buy-tickets');
+              buyTickets.href = '#';
+              buyTickets.textContent = 'Buy Tickets';
+              eventCard.appendChild(buyTickets);
+
+            // Check if this button is disabled for the current user
+            var disabledButtons = JSON.parse(localStorage.getItem('disabledButtons')) || [];
+            if (disabledButtons.includes(index.toString())) {
+                buyTickets.classList.add('disabled'); // Add the 'disabled' class
+            }
+
+            // Add event listener to handle button click
+            buyTickets.addEventListener('click', function() {
+                // Disable the button
+                buyTickets.classList.add('disabled'); // Add the 'disabled' class
+                // Add the event ID to the list of disabled buttons
+                disabledButtons.push(index.toString());
+                // Store the updated list in local storage
+                localStorage.setItem('disabledButtons', JSON.stringify(disabledButtons));
+            });
+
+              // Append event card to the container
+              eventContainer.appendChild(eventCard);
+          }
+      });
+  }
+} else {
+  console.error('Local storage is not supported in this browser.');
+}
+
+
+
+
 // fetch('https://connect.squareupsandbox.com/v2/catalog/list', {
 //   method: 'GET',
 //   headers: {
