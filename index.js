@@ -12,6 +12,27 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 
+fetch('https://square-hack-backend.onrender.com/get-catalog', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer EAAAEMGIzert15GGCNajtFaVYI2aTgMKJPngOMB0vzRgSclRiC3jjDZgX1IDBPUP'
+  }
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+})
+.then(data => {
+  console.log(data);
+})
+.catch(error => {
+  console.error('There was a problem with the fetch operation:', error);
+});
+
+
 
 // Handle the "Buy Tickets" button for the first constant event
 var firstEventBuyTickets = document.querySelector('.btn-buy-tickets[data-event-id="1"]');
