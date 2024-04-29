@@ -49,3 +49,7 @@
   margin:1px;
   padding:0;
 }
+
+#navbarNav{
+  justify-content:space-between;
+}

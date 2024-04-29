@@ -148,7 +148,7 @@ if (typeof(Storage) !== "undefined") {
                       headers: {
                           'Content-Type': 'application/json',
                           // Use the bearer token from environment variable
-                          'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+                          'Authorization': `Bearer ${secrets.BEARER_TOKEN}`
                       },
                       body: JSON.stringify({
                           "idempotencyKey": generateUUID(),
