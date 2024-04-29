@@ -16,7 +16,7 @@ fetch('https://square-hack-backend.onrender.com/get-catalog', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+    'Authorization': `Bearer ${secrets.BEARER_TOKEN}`
   }
 })
 .then(response => {
@@ -55,7 +55,7 @@ firstEventBuyTickets.addEventListener('click', function() {
       headers: {
         'Content-Type': 'application/json',
         
-        'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+        'Authorization': `Bearer ${secrets.BEARER_TOKEN}`
       },
       body: JSON.stringify({
         "idempotencyKey": idempotencyKey,
