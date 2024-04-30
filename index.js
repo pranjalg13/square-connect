@@ -1,4 +1,7 @@
-event_dates = ["2024-05-10"];
+event_dates_for_calender = [{
+  "date":"2024-05-10",
+  "description":"Cancer Charity Event"
+}];
 
 // Function to generate UUID (RFC4122 version 4)
 function generateUUID() {
@@ -23,7 +26,6 @@ function makeServerAlive() {
       return response.json();
     })
     .catch((error) => {
-      document.getElementById("loader").style.display = "none";
       console.error("There was a problem with the fetch operation:", error);
     });
 }
@@ -111,13 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
     popups: {
-      '2024-04-24': {
+      '2024-05-10': {
         modifier: 'bg-red',
         html: 'Meeting at 9:00 PM',
       }
     },
   };
-  
+
+  event_dates_for_calender.forEach(function(event) {
+    var date = event.date;
+    var description = event.description;
+    
+    // Check if the date already has a popup, if not, append one
+    if (!options.popups[date]) {
+      options.popups[date] = {
+        modifier: 'bg-blue', // You can change the modifier as needed
+        html: description,
+      };
+    }
+  });
+
   const calendar = new VanillaCalendar('#calendar', options);
 
   calendar.init();
@@ -153,12 +168,20 @@ document.addEventListener("DOMContentLoaded", function () {
             month: "long",
             day: "numeric",
           });
+
           var formattedDate =
             monthName +
             " " +
             eventDate.getDate() +
             ", " +
             eventDate.getFullYear();
+          
+
+          // Extract year, month, and date components from the Date object
+          var year = eventDate.getFullYear();
+          var month = String(eventDate.getMonth() + 1).padStart(2, "0"); // Add 1 to month because months are 0-indexed
+          var date_new = String(eventDate.getDate()).padStart(2, "0");
+          var formattedDateFinal = year + "-" + month + "-" + date_new;
 
           // Create event card elements
           var eventCard = document.createElement("div");
@@ -190,23 +213,24 @@ document.addEventListener("DOMContentLoaded", function () {
           buyTickets.textContent = "Buy Tickets";
           eventCard.appendChild(buyTickets);
 
-          // // Check if this button is disabled for the current user
-          // var disabledButtons = JSON.parse(localStorage.getItem('disabledButtons')) || [];
-          // if (disabledButtons.includes(index.toString())) {
-          //     buyTickets.classList.add('disabled'); // Add the 'disabled' class
-          // }
-
           // Add event listener to handle button click
-          buyTickets.addEventListener("click", eventBuyFunction);
+          buyTickets.addEventListener("click", eventBuyFunction());
+
+          event_dates_for_calender.push({
+            "date": formattedDateFinal,
+            "description": event.eventDescription
+          });
 
           // Append event card to the container
           eventContainer.appendChild(eventCard);
         }
+        console.log(event_dates_for_calender);
       });
     }
+    makeServerAlive();
   } else {
     console.error("Local storage is not supported in this browser.");
   }
 });
 
-makeServerAlive();
+

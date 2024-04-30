@@ -22,6 +22,7 @@ fetch("https://square-hack-backend.onrender.com/get-catalog", {
     return response.json();
   })
   .then((data) => {
+    console.log(data);
     document.getElementById("loader").style.display = "none";
 
     // Get the container element where the cards will be appended
@@ -45,12 +46,12 @@ fetch("https://square-hack-backend.onrender.com/get-catalog", {
       <div class="card-body">
         <h5 class="card-title">${product.name}</h5>
         <p class="card-text">${product.description}</p>
-        <p class="card-text">Price: $${product.price}</p>
+        <p class="card-text">Price: $${product.price.amount}</p>
         <div class="form-group">
           <label for="quantity${product.id}">Quantity:</label>
           <input type="number" class="form-control" id="quantity${product.id}" value="1">
         </div>
-        <button class="btn btn-primary" onclick="eventBuyFunction(${product.id}, '${product.name}', ${product.price})">Buy Now</button> <!-- Buy Now button -->
+        <button class="btn btn-primary" onclick="eventBuyFunction(${product.id}, '${product.name}', ${product.price.amount})">Buy Now</button> <!-- Buy Now button -->
       </div>
     `;
 
