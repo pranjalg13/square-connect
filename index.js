@@ -102,24 +102,26 @@ function eventFirstBuyFunction() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var calendarEl = document.getElementById("calendar");
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: "dayGridMonth", // Change the initial view as needed
-    // Add more configuration options as needed
-    events: [
-      // Define your events here
-      {
-        title: "Community Cleanup",
-        start: "2024-05-10", // Date of the event
-        description:
-          "Join us for a community cleanup event to help keep our neighborhood clean and green. The total sales 10% would be donated to cancer hospitals.",
+
+  var options = {
+    settings: {
+      visibility: {
+        theme: 'dark',
       },
-      // Add more events as needed
-    ],
-  });
+    },
+    popups: {
+      '2024-04-24': {
+        modifier: 'bg-red',
+        html: 'Meeting at 9:00 PM',
+      }
+    },
+  };
+  
+  const calendar = new VanillaCalendar('#calendar', options);
 
-  calendar.render();
+  calendar.init();
+
 
   // Handle the "Buy Tickets" button for the first constant event
   var firstEventBuyTickets = document.querySelector(
