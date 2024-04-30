@@ -19,7 +19,7 @@ function eventBuyFunction() {
           "quickPay": {
               "name": event.eventName + " Ticket", // Use event name in ticket name
               "priceMoney": {
-                  "amount": parseInt(event.ticketPrice), // Convert price to cents
+                  "amount": parseInt(event.ticketPrice) * 100, // Convert price to cents
                   "currency": "USD"
               },
               "locationId": "LB2W4A7DASQ8S"
@@ -56,7 +56,7 @@ function eventFirstBuyFunction() {
       "quickPay": {
         "name": "Ticket ",
         "priceMoney": {
-          "amount": 16,
+          "amount": 1600,
           "currency": "USD"
         },
         "locationId": "LB2W4A7DASQ8S"
@@ -79,25 +79,6 @@ function eventFirstBuyFunction() {
     console.error('There was a problem with the fetch operation:', error);
   });
 }
-
-fetch('https://square-hack-backend.onrender.com/get-catalog', {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-  }
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-})
-.then(data => {
-  console.log(data);
-})
-.catch(error => {
-  console.error('There was a problem with the fetch operation:', error);
-});
 
 
 document.addEventListener('DOMContentLoaded', function() {
