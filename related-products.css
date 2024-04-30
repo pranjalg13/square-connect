@@ -26,25 +26,6 @@
 }
 
 
-.card-header {
-  background-color: #007bff;
-  color: white;
-  border-radius: 0.25rem 0.25rem 0 0;
-}
-
-.card-body {
-  background-color: #f8f9fa;
-}
-
-.card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.card-text {
-  margin-bottom: 0.5rem;
-}
-
 .form-group {
   margin-bottom: 1rem;
 }
