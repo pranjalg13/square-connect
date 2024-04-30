@@ -1,3 +1,5 @@
+event_dates = ["2024-05-10"]
+
 // Function to generate UUID (RFC4122 version 4)
 function generateUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -85,8 +87,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth' // Change the initial view as needed
+    initialView: 'dayGridMonth', // Change the initial view as needed
     // Add more configuration options as needed
+    events: [
+      // Define your events here
+      {
+        title: 'Community Cleanup',
+        start: '2024-05-10', // Date of the event
+        description: 'Join us for a community cleanup event to help keep our neighborhood clean and green. The total sales 10% would be donated to cancer hospitals.',
+      },
+      // Add more events as needed
+    ]
   });
 
   calendar.render();  
@@ -112,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Format the event date
           var eventDate = new Date(event.eventDate);
           var monthName = eventDate.toLocaleString('default', { month: 'long' });
+          var formattedDateCalender = eventDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
           var formattedDate = monthName + " " + eventDate.getDate() + ", " + eventDate.getFullYear();
 
           // Create event card elements
