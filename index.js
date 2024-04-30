@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popups: {
       '2024-05-10': {
         modifier: 'bg-red',
-        html: 'Meeting at 9:00 PM',
+        html: 'Cancer Charity Event',
       }
     },
   };
